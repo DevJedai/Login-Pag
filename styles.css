@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>DevJedai Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('./img/boa.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        /* Container 3D para o efeito de rotação */
+        .container-3d {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 400px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .card-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .card-rotated {
+            transform: rotateY(180deg);
+        }
+        
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+        }
+        
+        .back-face {
+            transform: rotateY(180deg);
+        }
+        
+        /* Seu CSS original */
+        .container {
+            background: rgba(149, 0, 255, 0.1);
+            padding: 20px 45px 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            width: 350px;  
+            backdrop-filter: blur(15px);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .input-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .input-box input {
+            width: 90%;
+            padding: 10px;
+            border: none;
+            border-radius: 30px;
+            outline: none;
+        }
+        
+        .input-box i {
+            position: absolute;
+            top: 49%;
+            left: 240px;
+            transform: translateY(-50%);
+            color: #ffffff;
+        }
+        
+        input::placeholder {
+            color: #000000;
+            padding-left: 10px;
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #7b00ff;
+            border-radius: 20px;
+            background: #7b00ff;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        button:hover {
+            background: #6a00e0;
+        }
+        
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .forgot-password {
+            color: #ffffff;
+            font-size: 15px;
+            text-decoration: none;
+            margin-right: 40px;
+            margin-top: -4px;
+        }
+        
+        .lembrar {
+            color: white;
+            font-size: 15px;
+            margin-right: 90px;
+            margin-top: -4px;
+        }
+        
+        input[type="checkbox"] + label {
+            color: rgb(255, 255, 255);
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: 15px;
+            color: #ffffff;
+        }
+        
+        .register-link a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: semi-bold;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Container 3D para o efeito de rotação -->
+    <div class="container-3d">
+        <div class="card-3d" id="card3d">
+            <!-- FRENTE: Formulário de Login -->
+            <div class="face front-face">
+                <main class="container">
+                    <form>
+                        <h1>Login DevJedai</h1>
+                        <div class="input-box">
+                            <input type="text" placeholder="Usuário">
+                            <i class="bx bxs-user"></i>
+                        </div>
+                        <div class="input-box">
+                            <input type="password" placeholder="Senha">
+                            <i class="bx bxs-lock-alt"></i>
+                        </div>
+                        
+                        <div class="options">
+                            <div>
+                                <input type="checkbox" id="remember-me">
+                                <label for="remember-me" class="lembrar">Lembrar-me</label>
+                            </div>
+                            <a href="#" class="forgot-password">Esqueci a senha</a>
+                        </div>
+                        
+                        <button type="button" class="btn-login">Entrar</button>
+                        
+                        <div class="register-link">
+                            <p>Não tem uma conta? <a href="#" onclick="flipCard()">Registre-se</a></p>
+                        </div>
+                    </form>
+                </main>
+            </div>
+            
+            <!-- VERSO: Formulário de Registro -->
+            <div class="face back-face">
+                <main class="container">
+                    <form>
+                        <h1>Criar Conta</h1>
+                        <div class="input-box">
+                            <input type="text" placeholder="Usuário">
+                            <i class="bx bxs-user"></i>
+                        </div>
+                        <div class="input-box">
+                            <input type="password" placeholder="Senha">
+                            <i class="bx bxs-lock-alt"></i>
+                        </div>
+                        <div class="input-box">
+                            <input type="password" placeholder="Confirmar Senha">
+                            <i class="bx bxs-lock-alt"></i>
+                        </div>
+                        
+                        <button type="button" class="btn-login">Registrar</button>
+                        
+                        <div class="register-link">
+                            <p>Já tem uma conta? <a href="#" onclick="flipCard()">Fazer Login</a></p>
+                        </div>
+                    </form>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para girar o cartão
+        function flipCard() {
+            const card = document.getElementById('card3d');
+            card.classList.toggle('card-rotated');
+        }
+    </script>
+</body>
+</html>
+
+
+ /* Container do fundo animado */
+.stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: -1; /* fica atrás do login */
+}
+
+/* Cada estrela */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: blink 2s infinite ease-in-out;
+}
+
+/* brilho */
+@keyframes blink {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+
+.comet {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 15px 5px white;
+    opacity: 0.8;
+    transform: rotate(-45deg);
+    animation: cometFly 2s linear forwards;
+}
+
+@keyframes cometFly {
+    from {
+        transform: translate(0,0) rotate(-45deg);
+        opacity: 1;
+    }
+    to {
+        transform: translate(-800px, 800px) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
+
+/* Fundo animado */
+.stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: blink 2s infinite ease-in-out;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+/* ---------- FUNDO DE ESTRELAS E COMETAS ---------- */
+
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+/* Estrelas simples (limpo e elegante) */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: blink 2.5s infinite ease-in-out;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.25; }
+    50% { opacity: 1; }
+}
+
+/* Cometas */
+.comet {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 12px 4px rgba(255,255,255,0.8);
+    opacity: 0.9;
+    transform: rotate(-45deg);
+    animation: cometFly 1.8s linear forwards;
+}
+
+@keyframes cometFly {
+    from {
+        transform: translate(0,0) rotate(-45deg);
+        opacity: 1;
+    }
+    to {
+        transform: translate(-800px, 800px) rotate(-45deg);
+        opacity: 0;
+    }
+}

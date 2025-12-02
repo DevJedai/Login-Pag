@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+    <title>Portfolio!</title>
+</head>
+<body>
+    <div class="stars"></div>
+
+<body>
+
+    <!-- Fundo com estrelas -->
+    <div class="stars"></div>
+
+    <!-- Container 3D -->
+    <div class="container-3d">
+        <div class="card-3d" id="card3d">
+
+            <!-- FRENTE -->
+            <div class="face front-face">
+                <main class="container">
+                    <form>
+                        <h1>Dev.Jedai</h1>
+
+                        <div class="input-box">
+                            <input type="text" placeholder="Usuário">
+                            <i class="bx bxs-user"></i>
+                        </div>
+
+                        <div class="input-box">
+                            <input type="password" placeholder="Senha">
+                            <i class="bx bxs-lock-alt"></i>
+                        </div>
+
+                        <div class="options">
+                            <input type="checkbox" id="remember-me">
+                            <label for="remember-me" class="lembrar">Lembrar-me</label>
+                            <a href="#" class="forgot-password">Esqueci a senha</a>
+                        </div>
+
+                        <button type="button" class="btn-login">Entrar</button>
+
+                        <div class="register-link">
+                            <p>Não tem uma conta? <a href="#" onclick="flipCard()">Registre-se</a></p>
+                        </div>
+                    </form>
+                </main>
+            </div>
+
+            <!-- VERSO -->
+            <div class="face back-face">
+                <main class="container">
+                    <form>
+                        <h1>Criar Conta</h1>
+
+                        <div class="input-box">
+                            <input type="text" placeholder="Usuário">
+                            <i class="bx bxs-user"></i>
+                        </div>
+
+                        <div class="input-box">
+                            <input type="password" placeholder="Senha">
+                            <i class="bx bxs-lock-alt"></i>
+                        </div>
+
+                        <div class="input-box">
+                            <input type="password" placeholder="Confirmar Senha">
+                            <i class="bx bxs-lock-alt"></i>
+                        </div>
+
+                        <button type="button" class="btn-login">Registrar</button>
+
+                        <div class="register-link">
+                            <p>Já tem uma conta? <a href="#" onclick="flipCard()">Fazer Login</a></p>
+                        </div>
+                    </form>
+                </main>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function flipCard() {
+            const card = document.getElementById('card3d');
+            card.classList.toggle('card-rotated');
+        }
+
+        // Criar ESTRELAS
+        function createStars() {
+            const container = document.querySelector('.stars');
+            for (let i = 0; i < 120; i++) {
+                let star = document.createElement('div');
+                star.classList.add('star');
+                star.style.top = Math.random() * 100 + '%';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.animationDuration = (1 + Math.random() * 2) + 's';
+                container.appendChild(star);
+            }
+        }
+        createStars();
+
+        // Criar COMETAS
+        function spawnComet() {
+            const comet = document.createElement('div');
+            comet.classList.add('comet');
+
+            comet.style.top = Math.random() * 20 + '%';
+            comet.style.left = (80 + Math.random() * 20) + '%';
+
+            document.body.appendChild(comet);
+
+            setTimeout(() => comet.remove(), 2000);
+        }
+
+        setInterval(spawnComet, Math.random() * 3000 + 4000);
+    </script>
+
+</body>
+</html>
